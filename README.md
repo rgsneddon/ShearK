@@ -35,15 +35,63 @@ Need a login: a Shear wallet dest (`ssa1…`) or silent ID (`she1…`). Site: [s
 
 ## Linux VPS
 
+Use the **linux** zip (`ShearK-Miner-1.5-linux.zip`). The macOS and Windows zips will not run on a VPS.
+
+### 1. Get the zip onto the VPS
+
+SSH in (replace `user` and `vps.example.com` with your host):
+
+```bash
+ssh user@vps.example.com
+```
+
+**Download on the VPS** (simplest). `curl` or `wget`:
+
 ```bash
 curl -L -o sheark.zip \
   https://github.com/rgsneddon/ShearK/releases/download/1.5/ShearK-Miner-1.5-linux.zip
+```
+
+```bash
+wget -O sheark.zip \
+  https://github.com/rgsneddon/ShearK/releases/download/1.5/ShearK-Miner-1.5-linux.zip
+```
+
+If the VPS has no `curl`/`wget` yet (Debian/Ubuntu):
+
+```bash
+sudo apt-get update && sudo apt-get install -y curl wget unzip
+```
+
+**Or copy from your laptop** after you downloaded the linux zip at home.
+
+From a Mac or Linux machine:
+
+```bash
+scp ShearK-Miner-1.5-linux.zip user@vps.example.com:~/sheark.zip
+ssh user@vps.example.com
+```
+
+From Windows (PowerShell):
+
+```powershell
+scp ShearK-Miner-1.5-linux.zip user@vps.example.com:~/sheark.zip
+ssh user@vps.example.com
+```
+
+### 2. Unpack and check
+
+On the VPS, in the directory that has `sheark.zip`:
+
+```bash
 sudo apt-get update && sudo apt-get install -y unzip   # Debian/Ubuntu; skip if unzip exists
 unzip -o sheark.zip -d sheark && cd sheark
 chmod +x ShearK-Miner example.sh
 ./ShearK-Miner --selftest
 ./ShearK-Miner --print-config
 ```
+
+### 3. Run
 
 Edit `example.sh` (`YOUR_SHE1` and `--threads`, often `$(nproc)`), then:
 
@@ -57,7 +105,9 @@ Or run directly:
 ./ShearK-Miner --pool pool.shear.digital:1111 --user YOUR_SHE1.vps1 --threads $(nproc)
 ```
 
-Stay-up with systemd (as root). Paths and user are examples:
+### 4. Stay up (systemd)
+
+As root. Paths and user are examples:
 
 ```ini
 # /etc/systemd/system/sheark-miner.service
