@@ -118,15 +118,43 @@ chmod +x ShearK-Miner example.sh
 ./ShearK-Miner --print-config
 ```
 
-### 5. Run
+### 5. Edit `example.sh` (she1 + worker), then run
 
-Edit `example.sh` (`YOUR_SHE1` and `--threads`, often `$(nproc)`), then:
+`--user` is one string: your Shear login, a dot, then a worker name for this machine.
+
+| Part | What to put |
+| --- | --- |
+| Login | Your `she1…` silent ID **or** `ssa1…` dest. Not `shear1`. |
+| Worker | A unique name per box, e.g. `vps1`. Do not reuse the same `.worker` on two machines. |
+| Threads | This box’s logical CPUs. `$(nproc)` uses all of them. |
+
+Open the script:
+
+```bash
+nano example.sh
+```
+
+Find this line (near the bottom):
+
+```sh
+exec ./ShearK-Miner --pool pool.shear.digital:1111 --user YOUR_SHE1.worker --threads 8
+```
+
+Replace `YOUR_SHE1` and `worker`. Example (use your real login, not this dummy):
+
+```sh
+exec ./ShearK-Miner --pool pool.shear.digital:1111 --user she1qqexampleaddresshere.vps1 --threads $(nproc)
+```
+
+Save in nano: `Ctrl+O`, Enter, then `Ctrl+X`. (`vi example.sh` works the same if you prefer vi.)
+
+Run it:
 
 ```bash
 ./example.sh
 ```
 
-Or run directly:
+Or skip the script and pass the same values on the command line:
 
 ```bash
 ./ShearK-Miner --pool pool.shear.digital:1111 --user YOUR_SHE1.vps1 --threads $(nproc)
@@ -134,7 +162,7 @@ Or run directly:
 
 ### 6. Stay up (systemd)
 
-As root. Paths and user are examples:
+As root. Paths are examples. Put the **same** `--user she1….worker` you set in `example.sh`:
 
 ```ini
 # /etc/systemd/system/sheark-miner.service
@@ -199,7 +227,7 @@ xattr -d com.apple.quarantine ShearK-Miner 2>/dev/null || true
 
 If Gatekeeper blocks it: **System Settings → Privacy & Security → Open Anyway**, or right-click → **Open**.
 
-Edit `example.sh`, then `./example.sh`, or:
+Edit `example.sh` the same way as Linux VPS step 5: replace `YOUR_SHE1` with your `she1…` or `ssa1…` login, and `worker` with a unique name for this Mac (e.g. `mac1`). Then `./example.sh`, or:
 
 ```bash
 ./ShearK-Miner --pool pool.shear.digital:1111 --user YOUR_SHE1.mac1 --threads $(sysctl -n hw.logicalcpu)
