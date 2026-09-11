@@ -8,8 +8,8 @@ Official **ShearK-Miner 1.6** for ShearHash-v3 (RandomX light, 128 MiB cache, sa
 - Magic: **shear-testnet-v2** (do not mine the frozen `shear-testnet-v1` book)
 - Pool: `pool.shear.digital:1111`
 - Pin: **ShearK-Miner 1.6**. Do not recut 1.5 / 1.4 / 1.1 / 1.0 or Shear-Miner 1.1 / 1.0.
-- Paid login: `ssa1….worker` — an owned dest the wallet exported (**Copy dest**). `she1` without `--dest` is unpaid. Never `shear1`.
-- One proven floor share mints hash-bonus units onto that dest. The 1 SHE pot is PROP of proven dests (pool takes 1% of the pot only).
+- Paid login: `ssa1….worker` — wallet **Copy dest**. Offer `she1` when someone pays you; incoming coin lands on revolving `ssa1`. Rest-frame `shear1` stays in Closure.
+- Each hasher dest that produced proven work receives its own hash bonus on the next sealed block. The 1 SHE pot is PROP of those dests (pool takes 1% of the pot only).
 
 ```
 ShearK-Miner --pool pool.shear.digital:1111 --user YOUR_SSA1.worker --backend jit --threads 8
