@@ -1,18 +1,18 @@
 # ShearK
 
-Official **ShearK-Miner 1.8** for ShearHash-v3 (RandomX light, 128 MiB cache, salt `ShearHash-v3/rx`).
+Official **ShearK-Miner 1.9** for ShearHash-v3. Default `--backend jit-full` (2 GiB dataset, same digest as light). Salt `ShearHash-v3/rx`.
 
 - Ticker: **SHE**
 - Wire algo: **ShearHash**
 - Personalisation: **ShearHash-v3**
 - Magic: **shear-testnet-v4** (do not mine frozen `shear-testnet-v3` / v2)
 - Pool: `pool.shear.digital:1111`
-- Pin: **ShearK-Miner 1.8**. Do not recut 1.6 / 1.5 / 1.4. Header **128 bytes**.
+- Pin: **ShearK-Miner 1.9**. Do not recut 1.6 / 1.5 / 1.4. Header **128 bytes**.
 - Paid login: `ssa1….worker` — wallet **Copy dest**. Offer `she1` when someone pays you; incoming coin lands on revolving `ssa1`. Rest-frame `shear1` stays in Closure.
 - Each hasher dest that produced proven work receives its own hash bonus on the next sealed block. The 1 SHE pot is PROP of those dests (pool takes 1% of the pot only).
 
 ```
-ShearK-Miner --pool pool.shear.digital:1111 --user YOUR_SSA1.worker --backend jit --threads 8
+ShearK-Miner --pool pool.shear.digital:1111 --user YOUR_SSA1.worker --backend jit-full --threads 8
 ```
 
 `--selftest` digest `98818c31d739ef821db0242f76bd244b96f1fb5049d27ea9a192e95c67b39a8b`. The v1 vector `5d00a242…` must fail.
@@ -30,13 +30,13 @@ Mainnet `shear-v1` is not live. Do not recut this tag as mainnet.
 
 `--user` is one string: that `ssa1` dest, a dot, then a worker name unique to this machine (`pc1`, `vps1`, `rig2`). Two boxes must not share the same `.worker`.
 
-## Downloads (1.8)
+## Downloads (1.9)
 
 | OS | Zip | Inside the zip |
 | --- | --- | --- |
-| Windows | [ShearK-Miner-1.8-windows.zip](https://github.com/rgsneddon/ShearK/releases/download/1.8/ShearK-Miner-1.8-windows.zip) | `ShearK-Miner.exe` + `example.bat` |
-| Linux VPS / server | [ShearK-Miner-1.8-linux.zip](https://github.com/rgsneddon/ShearK/releases/download/1.8/ShearK-Miner-1.8-linux.zip) | `ShearK-Miner` + `example.sh` |
-| macOS | [ShearK-Miner-1.8-macos.zip](https://github.com/rgsneddon/ShearK/releases/download/1.8/ShearK-Miner-1.8-macos.zip) | `ShearK-Miner` + `example.sh` |
+| Windows | [ShearK-Miner-1.9-windows.zip](https://github.com/rgsneddon/ShearK/releases/download/1.9/ShearK-Miner-1.9-windows.zip) | `ShearK-Miner.exe` + `example.bat` |
+| Linux VPS / server | [ShearK-Miner-1.9-linux.zip](https://github.com/rgsneddon/ShearK/releases/download/1.9/ShearK-Miner-1.9-linux.zip) | `ShearK-Miner` + `example.sh` |
+| macOS | [ShearK-Miner-1.9-macos.zip](https://github.com/rgsneddon/ShearK/releases/download/1.9/ShearK-Miner-1.9-macos.zip) | `ShearK-Miner` + `example.sh` |
 
 Need a dest: wallet **Copy dest** (`ssa1…`). Site: [shear.digital](https://shear.digital). Pool: [pool.shear.digital](https://pool.shear.digital). Stratum **TCP 1111**.
 
@@ -59,7 +59,7 @@ ShearK-Miner.exe --selftest
 ShearK-Miner.exe --print-config
 ```
 
-`--print-config` must show `personalisation":"ShearHash-v3"`, version `1.8`, `rxMode=light`, `feePct=0`.
+`--print-config` must show `personalisation":"ShearHash-v3"`, version `1.9`, `rxMode=light`, `feePct=0`.
 
 `she1` login (RAM-only) must also pass `--dest` with the Copy dest.
 
@@ -70,7 +70,7 @@ Use the **linux** zip. The Windows zip will not run on a VPS.
 ```bash
 sudo apt-get update
 sudo apt-get install -y curl wget unzip ca-certificates libstdc++6
-curl -L -o sheark.zip https://github.com/rgsneddon/ShearK/releases/download/1.8/ShearK-Miner-1.8-linux.zip
+curl -L -o sheark.zip https://github.com/rgsneddon/ShearK/releases/download/1.9/ShearK-Miner-1.9-linux.zip
 unzip -o sheark.zip -d sheark && cd sheark
 chmod +x ShearK-Miner example.sh
 ./ShearK-Miner --selftest
@@ -96,7 +96,7 @@ Windows: native PE on a Windows box. Do not pack a Mac cross-compile as the Wind
 ## Flags (`--help`)
 
 ```
-ShearK-Miner 1.8 (ShearHash-v3 light)
+ShearK-Miner 1.9 (ShearHash-v3 light)
   --user she1…|ssa1….worker   required (not shear1)
   --dest ssa1…                owned payout dest (she1 login)
   --pool host:port            default pool.shear.digital:1111
