@@ -8,14 +8,14 @@ Official **ShearK-Miner 2.5** for ShearHash-v3. Default `--backend jit-full` (2 
 - Magic: **shear-testnet-v4** (do not mine frozen `shear-testnet-v3` / v2)
 - Pool: `pool.shear.digital:1111`
 - Pin: **ShearK-Miner 2.5**. Do not recut **2.4** / 2.3 / 2.2. Header **128 bytes**. Share floor is dest-bound. **Copy dest** may be short (`dest20`) or long (`dest20||B`, ~95 chars). Download **2.5**.
-- Paid login: `ssa1â€¦.worker` â€” wallet **Copy dest**. Offer `she1` when someone pays you; incoming coin lands on revolving `ssa1`. Rest-frame `shear1` stays in Closure.
+- Paid login: `ssa1.worker` -- wallet **Copy dest**. Offer `she1` when someone pays you; incoming coin lands on revolving `ssa1`. Rest-frame `shear1` stays in Closure.
 - Each hasher dest that produced proven work receives its own hash bonus on the next sealed block. The 1 SHE pot is PROP of those dests (pool takes 1% of the pot only).
 
 ```
 ShearK-Miner --pool pool.shear.digital:1111 --user YOUR_SSA1.worker --backend jit-full --threads 8
 ```
 
-`--selftest` digest `98818c31d739ef821db0242f76bd244b96f1fb5049d27ea9a192e95c67b39a8b`. The v1 vector `5d00a242â€¦` must fail.
+`--selftest` digest `98818c31d739ef821db0242f76bd244b96f1fb5049d27ea9a192e95c67b39a8b`. The v1 vector `5d00a242` must fail.
 
 Source lives in [rgsneddon/shear-testnet](https://github.com/rgsneddon/shear-testnet) (`sheark-miner/`, branch `main`). This repo is the miner pin, downloads, and how-to. Wallet: [rgsneddon/shear-testnet](https://github.com/rgsneddon/shear-testnet/releases/tag/0.40) **0.40**.
 
@@ -37,7 +37,7 @@ Mainnet `shear-v1` is not live. Do not recut this tag as mainnet.
 | Windows | [ShearK-Miner-2.5-windows.zip](https://github.com/rgsneddon/ShearK/releases/download/2.5/ShearK-Miner-2.5-windows.zip) | `ShearK-Miner.exe` + `example.bat` |
 | Linux VPS / server | [ShearK-Miner-2.5-linux.zip](https://github.com/rgsneddon/ShearK/releases/download/2.5/ShearK-Miner-2.5-linux.zip) | `ShearK-Miner` + `example.sh` |
 
-Need a dest: wallet **Copy dest** (`ssa1â€¦`). Site: [shear.digital](https://shear.digital). Pool: [pool.shear.digital](https://pool.shear.digital). Stratum **TCP 1111**.
+Need a dest: wallet **Copy dest** (`ssa1`). Site: [shear.digital](https://shear.digital). Pool: [pool.shear.digital](https://pool.shear.digital). Stratum **TCP 1111**.
 
 128 MiB RAM for the RandomX light cache, plus a little for threads. CPU only.
 
@@ -45,11 +45,11 @@ Need a dest: wallet **Copy dest** (`ssa1â€¦`). Site: [shear.digital](https:/
 
 1. Download the Windows zip.
 2. Unzip so `ShearK-Miner.exe` and `example.bat` sit in the same folder.
-3. If SmartScreen or Defender warns: **More info â†’ Run anyway**, or file **Properties â†’ Unblock**.
+3. If SmartScreen or Defender warns: **More info -> Run anyway**, or file **Properties -> Unblock**.
 4. Open `example.bat` in Notepad. Replace `YOUR_SSA1` with Copy dest. Replace `.worker` with a unique name. Set `--threads` to `%NUMBER_OF_PROCESSORS%`.
 5. Save. Double-click `example.bat`.
 
-Leave that window open. First line after a good start looks like `job=â€¦ height=â€¦ shareBits=8`. `accepted` should climb. Each accepted floor share is paid to that dest on the **next** sealed block (`kind:hash`).
+Leave that window open. First line after a good start looks like `job=... height=... shareBits=8`. `accepted` should climb. Each accepted floor share is paid to that dest on the **next** sealed block (`kind:hash`).
 
 Self-test:
 
@@ -96,9 +96,9 @@ Windows: native PE on a Windows box. Do not pack a Mac cross-compile as the Wind
 
 ```
 ShearK-Miner 2.5 (ShearHash-v3 light)
-  --user she1â€¦|ssa1â€¦.worker   required (not shear1)
-  --dest ssa1â€¦                owned payout dest (she1 login)
-  --pool host:port            default pool.shear.digital:1111
+  --user she1|ssa1.worker   required (not shear1)
+  --dest ssa1               owned payout dest (she1 login)
+  --pool host:port          default pool.shear.digital:1111
   --threads N
   --backend jit-full | jit | interpreter
   --notls
